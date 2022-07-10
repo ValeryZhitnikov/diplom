@@ -1,6 +1,6 @@
 import React from 'react';
 import './NotFound.css';
-import Info from '../Info/Info';
+import Info from '../../shared/ui/InfoLayout/InfoLayout';
 
 /**
  *  Not found 404 page

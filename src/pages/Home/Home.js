@@ -1,20 +1,19 @@
 import React from 'react';
 import './Home.css';
-import Banner from '../../components/Banner/Banner';
+import Layout from 'shared/ui/Layout/Layout';
+import Popular from './sections/Popular/Popular';
+import Catalog from './sections/Catalog/Catalog';
 
 /**
  *  Home page
  */
 const Home = () => {
-    return (
-      <main className="container">
-        <div className="row">
-          <div className="col">
-            <Banner />
-          </div>
-      </div>
-    </main>
-    );
+  return (
+    <Layout>
+      <Popular />
+      <Catalog />
+    </Layout>
+  );
 }
 
 // #endregion

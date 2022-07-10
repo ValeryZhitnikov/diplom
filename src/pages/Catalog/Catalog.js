@@ -1,22 +1,16 @@
 import React from 'react';
 import './Catalog.css';
-import Banner from '../../components/Banner/Banner';
+import Layout from 'shared/ui/Layout/Layout';
+import Section from 'shared/ui/Section/Section';
 
 /**
  *  Catalog page
  */
 const Catalog = () => {
   return (
-    <main className="container">
-      <div className="row">
-        <div className="col">
-          <Banner />
-          <section className="catalog">
-            <h2 className="text-center">Каталог</h2>
-          </section>
-        </div>
-      </div>
-    </main>
+    <Layout>
+      <Section sectionClass="catalog" title="Каталог" />
+    </Layout>
   );
 }
 
