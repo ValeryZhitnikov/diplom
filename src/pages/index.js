@@ -14,7 +14,7 @@ export const Routing = () => {
       <Route path='/cart.html' element={<Cart />} />
       <Route path='/about.html' element={<About />} />
       <Route path='/contacts.html' element={<Contacts />} />
-      <Route exact path="/catalog/:productId" element={<Product />} />
+      <Route exact path="/catalog/:productId.html" element={<Product />} />
       <Route path='/catalog.html' element={<Catalog />} />
       <Route path='/' element={<Home />} />
       <Route path='*' element={<NotFound />} />

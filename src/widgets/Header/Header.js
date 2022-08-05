@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import PropTypes from 'prop-types';
 import NavItem from 'shared/ui/NavItem/NavItem';
-import SearchForm from './ui/SearchForm/SearchForm';
+import SearchFormHeader from './ui/SearchFormHeader';
 import HeaderControlPics from './ui/HeaderControlPics/HeaderControlPics';
 import headerLogo from './assets/header-logo.png'
 
@@ -45,7 +45,7 @@ const Header = (props) => {
               </ul>
               <div>
                 <HeaderControlPics />
-                <SearchForm />
+                <SearchFormHeader />
               </div>
             </div>
           </nav>

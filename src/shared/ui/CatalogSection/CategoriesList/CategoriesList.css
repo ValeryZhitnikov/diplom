@@ -1,0 +1,8 @@
+.nav-link_category,
+.nav-link_category:active,
+.nav-link_category:focus {
+  background: none;
+  border: none;
+  color: #727e86;
+  outline: none
+}

@@ -2,7 +2,7 @@ import { withProviders } from "./providers";
 import './index.css';
 import { Routing } from "pages";
 import { Provider } from "react-redux";
-import store from "shared/api/store";
+import store from "shared/lib/store";
 
 const App = () => {
   return (

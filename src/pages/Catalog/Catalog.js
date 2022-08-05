@@ -1,7 +1,7 @@
 import React from 'react';
 import './Catalog.css';
 import Layout from 'shared/ui/Layout/Layout';
-import Section from 'shared/ui/Section/Section';
+import CatalogSection from 'shared/ui/CatalogSection/CatalogSection';
 
 /**
  *  Catalog page
@@ -9,7 +9,7 @@ import Section from 'shared/ui/Section/Section';
 const Catalog = () => {
   return (
     <Layout>
-      <Section sectionClass="catalog" title="Каталог" />
+      <CatalogSection />
     </Layout>
   );
 }

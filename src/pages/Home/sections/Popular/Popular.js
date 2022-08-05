@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { requestPopularList } from 'shared/api/actions/actionCreators';
+import React, { useEffect, useState } from 'react';
 import Section from 'shared/ui/Section/Section';
-import Product from 'entities/product/Product';
+import { ProductCard } from 'entities/product';
+import { getDataJson } from 'shared/api/fetch';
 
 const Popular = () => {
-  const { popularProducts, loading, error } = useSelector(state => state.popularList);
-  const dispatch = useDispatch();
+  const [popularProducts, setPopularProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    dispatch(requestPopularList());
+    getDataJson(process.env.REACT_APP_POPULAR_URL, setPopularProducts, setLoading, setError);
   }, []);
 
   const popularProductsList = popularProducts.map(product => {
@@ -19,7 +19,7 @@ const Popular = () => {
       price: product.price,
       img: product.images[0]
     }
-    return <Product key={product.id} {...props} />
+    return <ProductCard key={product.id} {...props} />
   });
 
   return(
