@@ -6,6 +6,7 @@ import MainButton from '../MainButton/MainButton';
 import SearchForm from '../SearchForm';
 import CategoriesList from 'shared/ui/CatalogSection/CategoriesList/CategoriesList';
 import { getDataJson } from 'shared/api/fetch';
+import Preloader from '../Preloader';
 
 const initialOffset = 6;
 const offsetSize = 6;
@@ -78,6 +79,7 @@ const CatalogSection = () => {
       <Section title="Каталог" sectionClass="catalog">
         <SearchForm formClasses="catalog-search-form form-inline" />
         <CategoriesList selectedCategory={selectedCategory} onSelectCategoryHandler={onSelectCategoryHandler} />
+        {loading && <Preloader />}
         {products && !loading && !error && 
         <>
         <div className="row">

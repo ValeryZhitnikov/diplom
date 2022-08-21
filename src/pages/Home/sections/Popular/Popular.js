@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Section from 'shared/ui/Section/Section';
 import { ProductCard } from 'entities/product';
 import { getDataJson } from 'shared/api/fetch';
+import Preloader from 'shared/ui/Preloader';
 
 const Popular = () => {
   const [popularProducts, setPopularProducts] = useState([]);
@@ -24,13 +25,14 @@ const Popular = () => {
 
   return(
     <>
-      {popularProducts && !loading && !error && 
-        <Section title="Хиты продаж!" sectionClass="top-sales">
-          <div className="row">
-            {popularProductsList}
-          </div>
-        </Section>
-      }
+      <Section title="Хиты продаж!" sectionClass="top-sales">
+        {loading && <Preloader />}
+        {popularProducts && !loading && !error && 
+        <div className="row">
+          {popularProductsList}
+        </div>
+        }
+      </Section>
     </>
   )
 }
