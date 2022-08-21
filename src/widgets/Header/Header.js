@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import PropTypes from 'prop-types';
@@ -26,6 +26,11 @@ const defaultProps = {
  */
 const Header = (props) => {
   const { links } = props;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const searchOpenHandler = () => {
+    setIsOpen(!isOpen);
+  }
 
   const linksList = links.map(link => {
     return <NavItem key={link.id} path={link.path} text={link.title} />
@@ -44,8 +49,8 @@ const Header = (props) => {
                 {linksList}
               </ul>
               <div>
-                <HeaderControlPics />
-                <SearchFormHeader />
+                <HeaderControlPics searchOpenHandler={searchOpenHandler} />
+                <SearchFormHeader isOpen={isOpen} />
               </div>
             </div>
           </nav>

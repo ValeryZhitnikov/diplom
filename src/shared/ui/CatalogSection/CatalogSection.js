@@ -46,7 +46,6 @@ const CatalogSection = () => {
     const categoryUrl = categoryId ? `categoryId=${categoryId}` : '';
     setSelectedCategory(categoryUrl);
     const requestUrl = q ? `${process.env.REACT_APP_ITEMS_URL}?q=${q}&${categoryUrl}` : `${process.env.REACT_APP_ITEMS_URL}?${categoryUrl}`;
-    console.log(requestUrl);
     getDataJson(requestUrl, checkAndSetProducts, setLoading, setError);
   }
 
@@ -78,11 +77,11 @@ const CatalogSection = () => {
     <>
       <Section title="Каталог" sectionClass="catalog">
         <SearchForm formClasses="catalog-search-form form-inline" />
-        <CategoriesList onSelectCategoryHandler={onSelectCategoryHandler} />
+        <CategoriesList selectedCategory={selectedCategory} onSelectCategoryHandler={onSelectCategoryHandler} />
         {products && !loading && !error && 
         <>
         <div className="row">
-          {productsList}
+          {productsList.length > 0 ? productsList : <p>Извините, таких товаров нет</p>}
         </div>
         {loadMore && 
         <div className="text-center">

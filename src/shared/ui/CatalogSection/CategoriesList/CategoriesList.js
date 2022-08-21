@@ -3,7 +3,7 @@ import './CategoriesList.css';
 import { getDataJson } from 'shared/api/fetch';
 
 const CategoriesList = (props) => {
-  const { onSelectCategoryHandler } = props;
+  const { selectedCategory, onSelectCategoryHandler } = props;
   const [categories, setCategoriesList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,7 +15,8 @@ const CategoriesList = (props) => {
   const categoriesList = categories ? categories.map(category => {
     return ( 
     <li key={category.id} className="nav-item">
-      <button onClick={() => onSelectCategoryHandler(category.id)} className="nav-link nav-link_category" href="#">{category.title}</button>
+      {/* TODO Доделать выделение активной категории */}
+      <button onClick={() => onSelectCategoryHandler(category.id)} className={`nav-link nav-link_category`} href="#">{category.title}</button>
     </li>);
   }) : [];
 

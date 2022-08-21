@@ -12,7 +12,7 @@ const SearchForm = (props) => {
 
   useEffect(() => {
     setSearchValue(q);
-  }, [q])
+  }, [q]);
 
   const handleChange = ({target}) => {
     const value = target.value;
@@ -26,6 +26,7 @@ const SearchForm = (props) => {
 
   return (
     <form onSubmit={submitHandler} className={formClasses}>
+      {/* TODO Разобраться с ошибкой при пустом value у инпута */}
       <input onChange={handleChange} className="form-control" placeholder="Поиск" value={searchInput} />
     </form>
   )
