@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainButton from 'shared/ui/MainButton/MainButton';
 
 const ProductDetail = (props) => {
   const { product } = props;
+  const [productCount, setProductCount ] = useState(1);
+
+  const countProductUp = () => {
+    setProductCount(prevCount => {
+      return prevCount += 1;
+    });
+  }
+
+  const countProductDown = () => {
+    setProductCount(prevCount => {
+      return prevCount > 0 ? prevCount -= 1 : 0;
+    });
+  }
 
   const sizes = product.sizes.map((size, i) => {
     return size.avalible ? <span key={i} className="catalog-item-size">{size.size}</span> : null;
@@ -47,14 +60,13 @@ const ProductDetail = (props) => {
                   </tr>
               </tbody>
           </table>
-          {/* TODO Доделать счетчик количества */}
           {sizes && (
             <div className="text-center">
               <p>Размеры в наличии: {sizes} </p>
               <p>Количество: <span className="btn-group btn-group-sm pl-2">
-                      <button className="btn btn-secondary">-</button>
-                      <span className="btn btn-outline-primary">1</span>
-                      <button className="btn btn-secondary">+</button>
+                      <button onClick={countProductDown} className="btn btn-secondary">-</button>
+                      <span className="btn btn-outline-primary">{productCount}</span>
+                      <button onClick={countProductUp} className="btn btn-secondary">+</button>
                   </span>
               </p>
           </div>
