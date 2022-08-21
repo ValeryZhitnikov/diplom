@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const CATALOG_ROUTE = "/catalog.html";
 
@@ -7,6 +7,12 @@ const SearchForm = (props) => {
   const { formClasses } = props;
   const [searchInput, setSearchValue] = useState('');
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const q = searchParams.get("q");
+
+  useEffect(() => {
+    setSearchValue(q);
+  }, [q])
 
   const handleChange = ({target}) => {
     const value = target.value;

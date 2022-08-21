@@ -11,6 +11,7 @@ const initialOffset = 6;
 const offsetSize = 6;
 
 const CatalogSection = () => {
+  const [loadMore, setLoadMore] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [offsetUrl, setOffsetUrl] = useState(''); 
   const [currentOffset, setCurrentOfset] = useState(initialOffset); 
@@ -20,12 +21,18 @@ const CatalogSection = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const q = searchParams.get("q");
 
+  const checkAndSetProducts = (products) => {
+    products.length < offsetSize ? setLoadMore(false) : setLoadMore(true);
+    setProducts(products);
+  }
+
   useEffect(() => {
     const requestUrl = q ? `${process.env.REACT_APP_ITEMS_URL}?q=${q}` : process.env.REACT_APP_ITEMS_URL;
-    getDataJson(requestUrl, setProducts, setLoading, setError);
+    getDataJson(requestUrl, checkAndSetProducts, setLoading, setError);
   }, [searchParams]);
 
   const loadProducts = (products) => {
+    products.length < offsetSize ? setLoadMore(false) : setLoadMore(true);
     setProducts(prevProducts => {
       const productsSet = new Set([...prevProducts, ...products]);
       return [...productsSet];
@@ -36,20 +43,24 @@ const CatalogSection = () => {
     setProducts([]);
     setCurrentOfset(initialOffset);
     setOffsetUrl('');
-    const categoryUrl = categoryId ? `?categoryId=${categoryId}` : '';
+    const categoryUrl = categoryId ? `categoryId=${categoryId}` : '';
     setSelectedCategory(categoryUrl);
-    const requestUrl = `${process.env.REACT_APP_ITEMS_URL}${categoryUrl}`;
-    getDataJson(requestUrl, setProducts, setLoading, setError);
+    const requestUrl = q ? `${process.env.REACT_APP_ITEMS_URL}?q=${q}&${categoryUrl}` : `${process.env.REACT_APP_ITEMS_URL}?${categoryUrl}`;
+    console.log(requestUrl);
+    getDataJson(requestUrl, checkAndSetProducts, setLoading, setError);
   }
 
-  // TODO Разобраться как обрабатывать количество товаров в категории
   const loadMoreHandler = () => {
     setCurrentOfset(prevOffset => {
       return prevOffset += offsetSize;
     });
-    const offsetUrl = selectedCategory ? `&?offset=${currentOffset}` : `?offset=${currentOffset}`;
+
+    const offsetUrl = selectedCategory ? `&offset=${currentOffset}` : `offset=${currentOffset}`;
     setOffsetUrl(offsetUrl);
-    const requestUrl = `${process.env.REACT_APP_ITEMS_URL}${selectedCategory}${offsetUrl}`;
+
+    const search = q ? `&q=${q}` : ''; 
+    
+    const requestUrl = `${process.env.REACT_APP_ITEMS_URL}?${selectedCategory}${offsetUrl}${search}`;
     getDataJson(requestUrl, loadProducts, setLoading, setError);
   }
 
@@ -73,9 +84,11 @@ const CatalogSection = () => {
         <div className="row">
           {productsList}
         </div>
+        {loadMore && 
         <div className="text-center">
           <MainButton handlerClick={loadMoreHandler} buttonClass="btn-outline-primary" text="Загрузить ещё" />
         </div>
+        }
         </>
         }
       </Section>
