@@ -1,22 +1,30 @@
 import { legacy_createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { combineEpics, createEpicMiddleware } from "redux-observable";
+import cartReducer from "../reducers/cart";
+import { loadState } from "../localStorage";
 
 const reducer = combineReducers({
-  
+  cartList: cartReducer
 });
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
+const persistedState = loadState();
 
-const epic = combineEpics(
+
+// TODO Пока закомментировал чтобы разобраться, нужен ли тут вообще observable
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
+
+// const epic = combineEpics(
   
-);
+// );
 
-const epicMiddleware = createEpicMiddleware();
+// const epicMiddleware = createEpicMiddleware();
 
-const store = legacy_createStore(reducer, composeEnhancers(
-  applyMiddleware(epicMiddleware)
-));
+// const store = legacy_createStore(reducer, composeEnhancers(
+//   applyMiddleware(epicMiddleware)
+// ));
 
-epicMiddleware.run(epic);
+// epicMiddleware.run(epic);
+
+const store = legacy_createStore(reducer, persistedState);
 
 export default store;

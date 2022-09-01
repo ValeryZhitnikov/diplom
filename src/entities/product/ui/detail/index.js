@@ -1,20 +1,46 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import MainButton from 'shared/ui/MainButton/MainButton';
+import { addToCart } from 'shared/lib/actions/actionCreators';
 
 const ProductDetail = (props) => {
   const { product } = props;
-  const [productCount, setProductCount ] = useState(1);
+  const dispatch = useDispatch();
+
+  const initialProduct = {
+    id: product.id,
+    name: product.title,
+    price: product.price,
+    count: 1
+  }
+  const [ productToCart, setProductToCart ] = useState(initialProduct);
+  const [ productCount, setProductCount ] = useState(1);
+
+  const setProductCountToCart = () => {
+    setProductToCart(prevProduct => {
+      return {
+        ...prevProduct,
+        count: productCount
+      }
+    });
+  }
 
   const countProductUp = () => {
     setProductCount(prevCount => {
       return prevCount += 1;
     });
+    setProductCountToCart();
   }
 
   const countProductDown = () => {
     setProductCount(prevCount => {
-      return prevCount > 0 ? prevCount -= 1 : 0;
+      return prevCount > 1 ? prevCount -= 1 : 1;
     });
+    setProductCountToCart();
+  }
+
+  const addToCartHandler = () => {
+    dispatch(addToCart(productToCart));
   }
 
   const sizes = product.sizes.map((size, i) => {
@@ -71,7 +97,7 @@ const ProductDetail = (props) => {
               </p>
           </div>
           )}
-          <MainButton buttonClass="btn-danger btn-block btn-lg" text="В корзину" />
+          <MainButton handlerClick={addToCartHandler} buttonClass="btn-danger btn-block btn-lg" text="В корзину" />
       </div>
     </div>
   )

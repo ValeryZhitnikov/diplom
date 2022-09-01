@@ -3,6 +3,14 @@ import './index.css';
 import { Routing } from "pages";
 import { Provider } from "react-redux";
 import store from "shared/lib/store";
+import { saveState } from "shared/lib/localStorage";
+
+store.subscribe(() => {
+  saveState({
+    cartList: store.getState().cartList,
+    totalPrice: store.getState().totalPrice,
+  });
+});
 
 const App = () => {
   return (

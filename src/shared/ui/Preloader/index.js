@@ -2,7 +2,7 @@ import React from 'react';
 
 const Preloader = () => {
   return (
-    <div class="preloader">
+    <div className="preloader">
       <span></span>
       <span></span>
       <span></span>

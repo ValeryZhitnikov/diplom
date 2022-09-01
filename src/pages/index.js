@@ -1,7 +1,7 @@
 import { Route, Routes, Redirect } from "react-router-dom";
 
 import Home from './Home/Home';
-import Cart from './Cart/Cart';
+import Cart from "./Cart";
 import NotFound from './NotFound/NotFound';
 import Catalog from './Catalog/Catalog';
 import Contacts from "./Contacts/Contacts";
