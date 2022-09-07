@@ -11,10 +11,22 @@ const ProductDetail = (props) => {
     id: product.id,
     name: product.title,
     price: product.price,
+    size: null,
     count: 1
   }
   const [ productToCart, setProductToCart ] = useState(initialProduct);
   const [ productCount, setProductCount ] = useState(1);
+  const [ selectedSize, setSelectedSize ] = useState(null);
+
+  const selectSizeHandler = (size) => {
+    setSelectedSize(size);
+    setProductToCart(prevProduct => {
+      return {
+        ...prevProduct,
+        size
+      }
+    });
+  }
 
   const setProductCountToCart = () => {
     setProductToCart(prevProduct => {
@@ -27,7 +39,7 @@ const ProductDetail = (props) => {
 
   const countProductUp = () => {
     setProductCount(prevCount => {
-      return prevCount += 1;
+      return prevCount + 1 <= 10 ? prevCount += 1 : prevCount;
     });
     setProductCountToCart();
   }
@@ -44,7 +56,8 @@ const ProductDetail = (props) => {
   }
 
   const sizes = product.sizes.map((size, i) => {
-    return size.avalible ? <span key={i} className="catalog-item-size">{size.size}</span> : null;
+    let classes = `catalog-item-size ${size.size == selectedSize && 'selected'}`
+    return size.avalible ? <span onClick={() => selectSizeHandler(size.size)} key={i} className={classes}>{size.size}</span> : null;
   })
 
   return (
@@ -97,7 +110,7 @@ const ProductDetail = (props) => {
               </p>
           </div>
           )}
-          <MainButton handlerClick={addToCartHandler} buttonClass="btn-danger btn-block btn-lg" text="В корзину" />
+          <MainButton disabled={!selectedSize && true} handlerClick={addToCartHandler} buttonClass="btn-danger btn-block btn-lg" text="В корзину" />
       </div>
     </div>
   )

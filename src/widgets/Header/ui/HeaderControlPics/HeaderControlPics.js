@@ -15,7 +15,7 @@ const HeaderControlPics = (props) => {
     <div className="header-controls-pics">
       <div onClick={searchOpenHandler} data-id="search-expander" className="header-controls-pic header-controls-search"></div>
       <Link to="/cart.html" className="header-controls-pic header-controls-cart">
-        <div className="header-controls-cart-full">{cartCount}</div>
+        {cartCount > 0 && <div className="header-controls-cart-full">{cartCount}</div>}
         <div className="header-controls-cart-menu"></div>
       </Link>
     </div>

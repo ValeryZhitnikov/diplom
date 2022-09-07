@@ -34,3 +34,18 @@ export const getDataJson = (url, onSucces, onLoading, onError) => {
     .catch(error => onError(error))
     .finally(() => onLoading(false))
 }
+
+export const postDataJson = (url, data, onSucces, onLoading, onError) => {
+  onLoading(true);
+  const requestUrl = `${process.env.REACT_APP_SERVER_URL}/${url}`;
+  fetch(requestUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(() => onSucces())
+    .catch(error => onError(error))
+    .finally(() => onLoading(false))
+}

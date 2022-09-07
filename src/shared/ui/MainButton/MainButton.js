@@ -2,10 +2,10 @@ import React from 'react';
 import './MainButton.css';
 
 const MainButton = props => {
-  const { text, buttonClass, handlerClick, type } = props;
+  const { text, buttonClass, handlerClick, type, disabled } = props;
 
   return (
-    <button type={type} onClick={handlerClick} className={`btn ${buttonClass}`}>{text}</button>
+    <button disabled={disabled} type={type} onClick={handlerClick} className={`btn ${buttonClass}`}>{text}</button>
   )
 }
 
