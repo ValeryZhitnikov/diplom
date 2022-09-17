@@ -28,27 +28,25 @@ const ProductDetail = (props) => {
     });
   }
 
-  const setProductCountToCart = () => {
+  const setProductCountToCart = (count) => {
     setProductToCart(prevProduct => {
       return {
         ...prevProduct,
-        count: productCount
+        count
       }
     });
   }
 
   const countProductUp = () => {
-    setProductCount(prevCount => {
-      return prevCount + 1 <= 10 ? prevCount += 1 : prevCount;
-    });
-    setProductCountToCart();
+    const newCount = productCount + 1 <= 10 ? productCount + 1 : productCount;
+    setProductCount(newCount);
+    setProductCountToCart(newCount);
   }
 
   const countProductDown = () => {
-    setProductCount(prevCount => {
-      return prevCount > 1 ? prevCount -= 1 : 1;
-    });
-    setProductCountToCart();
+    const newCount = productCount - 1 >= 0 ? productCount - 1 : productCount;
+    setProductCount(newCount);
+    setProductCountToCart(newCount);
   }
 
   const addToCartHandler = () => {

@@ -8,7 +8,7 @@ const SearchForm = (props) => {
   const [searchInput, setSearchValue] = useState('');
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const q = searchParams.get("q");
+  const q = searchParams.get("q") ?? '';
 
   useEffect(() => {
     setSearchValue(q);
@@ -26,7 +26,6 @@ const SearchForm = (props) => {
 
   return (
     <form onSubmit={submitHandler} className={formClasses}>
-      {/* TODO Разобраться с ошибкой при пустом value у инпута */}
       <input onChange={handleChange} className="form-control" placeholder="Поиск" value={searchInput} />
     </form>
   )
