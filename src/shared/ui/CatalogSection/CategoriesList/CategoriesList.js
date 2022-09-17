@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './CategoriesList.css';
 import { getDataJson } from 'shared/api/fetch';
+import ErrorComponent from 'shared/ui/ErrorComponent';
+import Preloader from 'shared/ui/Preloader';
 
 const CategoriesList = (props) => {
   const { selectedCategory, onSelectCategoryHandler } = props;
@@ -22,6 +24,8 @@ const CategoriesList = (props) => {
 
   return(
     <>
+      {!loading && error && <ErrorComponent error={error} />}
+      {loading && <Preloader />}
       {categories && !loading && !error && 
       <ul className="catalog-categories nav justify-content-center">
         <li className="nav-item">

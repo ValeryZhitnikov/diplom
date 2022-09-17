@@ -6,6 +6,7 @@ import MainButton from 'shared/ui/MainButton/MainButton';
 import { postDataJson } from 'shared/api/fetch';
 import { clearCart } from 'shared/lib/actions/actionCreators';
 import Preloader from 'shared/ui/Preloader';
+import ErrorComponent from 'shared/ui/ErrorComponent';
 
 const initialForm = {
   phone: '',
@@ -68,7 +69,7 @@ const OrderForm = () => {
 
   return (
     <>
-    {!loading && error && <p>Возникла ошибка {error}</p>}
+    {!loading && error && <ErrorComponent error={error} />}
     {loading && <Preloader />}
     {!loading && !error && succes && <h2>Заказ оформлен!</h2>}
     {cartList.cartList.length > 0 && !loading && !error && !succes && <Section title="Оформить заказ" sectionClass="order">

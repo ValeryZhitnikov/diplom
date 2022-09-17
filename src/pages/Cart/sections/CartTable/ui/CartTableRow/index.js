@@ -8,8 +8,8 @@ const CartTableRow = (props) => {
   const { cartItem, index } = props;
   const dispatch = useDispatch();
 
-  const deleteRowHandler = (id, price, size) => {
-    dispatch(deleteFromCart(id, price, size));
+  const deleteRowHandler = (id, size) => {
+    dispatch(deleteFromCart(id, size));
   }
   
   return (
@@ -19,8 +19,8 @@ const CartTableRow = (props) => {
       <td>{cartItem.size}</td>
       <td>{cartItem.count}</td>
       <td>{cartItem.price} руб.</td>
-      <td>{cartItem.price} руб.</td>
-      <td><MainButton handlerClick={() => deleteRowHandler(cartItem.id, cartItem.price * cartItem.count, cartItem.size)} text="Удалить" buttonClass="btn-outline-danger btn-sm" /></td>
+      <td>{cartItem.price * cartItem.count} руб.</td>
+      <td><MainButton handlerClick={() => deleteRowHandler(cartItem.id, cartItem.size)} text="Удалить" buttonClass="btn-outline-danger btn-sm" /></td>
     </tr>
   )
 }

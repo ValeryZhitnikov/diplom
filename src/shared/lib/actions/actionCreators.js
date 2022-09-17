@@ -4,8 +4,8 @@ export const addToCart = (product) => {
   return { type: ADD_TO_CART, payload: {product} };
 };
 
-export const deleteFromCart = (id, price, size) => {
-  return { type: DELETE_FROM_CART, payload: {id, price, size} };
+export const deleteFromCart = (id, size) => {
+  return { type: DELETE_FROM_CART, payload: {id, size} };
 };
 
 export const clearCart = () => {

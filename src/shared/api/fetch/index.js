@@ -31,7 +31,7 @@ export const getDataJson = (url, onSucces, onLoading, onError) => {
       }
     })
     .then(data => onSucces(data))
-    .catch(error => onError(error))
+    .catch(error => onError(error.message))
     .finally(() => onLoading(false))
 }
 

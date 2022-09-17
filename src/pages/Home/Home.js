@@ -16,6 +16,4 @@ const Home = () => {
   );
 }
 
-// #endregion
-
 export default Home;

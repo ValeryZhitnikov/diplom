@@ -8,7 +8,11 @@ const CartTable = () => {
 
   const cartListRows = cartList.cartList.map((cartItem, i) => {
     return <CartTableRow key={i} index={i+1} cartItem={cartItem} />
-  })
+  });
+
+  const cartTotalPrice = cartList.cartList.reduce((totalPrice, cartItem, i) => {
+    return totalPrice + cartItem.price * cartItem.count;
+  }, 0);
 
   return (
     <Section title="Корзина" sectionClass="cart">
@@ -28,7 +32,7 @@ const CartTable = () => {
           {cartListRows}
           <tr>
             <td colSpan="5" className="text-right">Общая стоимость</td>
-            <td>{cartList.totalPrice} руб.</td>
+            <td>{cartTotalPrice} руб.</td>
           </tr>
         </tbody>
       </table>}

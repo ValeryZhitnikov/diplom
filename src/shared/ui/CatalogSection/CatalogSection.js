@@ -7,6 +7,7 @@ import SearchForm from '../SearchForm';
 import CategoriesList from 'shared/ui/CatalogSection/CategoriesList/CategoriesList';
 import { getDataJson } from 'shared/api/fetch';
 import Preloader from '../Preloader';
+import ErrorComponent from '../ErrorComponent';
 
 const initialOffset = 6;
 const offsetSize = 6;
@@ -64,7 +65,7 @@ const CatalogSection = () => {
     getDataJson(requestUrl, loadProducts, setLoading, setError);
   }
 
-  const productsList = products.map(product => {
+  const productsList = products ? products.map(product => {
     const props = {
       id: product.id,
       name: product.title,
@@ -72,16 +73,17 @@ const CatalogSection = () => {
       img: product.images[0]
     }
     return <ProductCard key={product.id} {...props} />
-  });
+  }) : [];
 
   return (
     <>
       <Section title="Каталог" sectionClass="catalog">
         <SearchForm formClasses="catalog-search-form form-inline" />
-        <CategoriesList selectedCategory={selectedCategory} onSelectCategoryHandler={onSelectCategoryHandler} />
+        {!loading && error && <ErrorComponent error={error} />}
         {loading && <Preloader />}
         {products && !loading && !error && 
         <>
+        <CategoriesList selectedCategory={selectedCategory} onSelectCategoryHandler={onSelectCategoryHandler} />
         <div className="row">
           {productsList.length > 0 ? productsList : <p>Извините, таких товаров нет</p>}
         </div>

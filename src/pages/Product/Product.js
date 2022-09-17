@@ -6,6 +6,7 @@ import Layout from 'shared/ui/Layout/Layout';
 import { ProductDetail } from 'entities/product';
 import { getDataJson } from 'shared/api/fetch';
 import Preloader from 'shared/ui/Preloader';
+import ErrorComponent from 'shared/ui/ErrorComponent';
 
 /**
  * Product page
@@ -22,6 +23,7 @@ const Product = () => {
 
   return (
   <Layout>
+    {!loading && error && <ErrorComponent error={error} />}
     {loading && <Preloader />}
     {product && !loading && !error &&
     (<Section sectionClass="catalog-item" title={product.title}>
