@@ -7,8 +7,7 @@ import { saveState } from "shared/lib/localStorage";
 
 store.subscribe(() => {
   saveState({
-    cartList: store.getState().cartList,
-    totalPrice: store.getState().totalPrice,
+    cartList: store.getState().cartList
   });
 });
 
