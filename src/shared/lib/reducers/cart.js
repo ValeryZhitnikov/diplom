@@ -34,7 +34,8 @@ export default function cartReducer(state = initialState, action) {
       }
     case CLEAR_CART:
       return {
-        ...initialState
+        ...state,
+        cartList: []
       }
     default:
       return state;

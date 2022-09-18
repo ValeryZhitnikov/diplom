@@ -48,8 +48,8 @@ const OrderForm = () => {
   }
 
   const onSucces = () => {
-    dispatch(clearCart());
     setSucces(true);
+    dispatch(clearCart());
     setForm(initialForm);
   }
 

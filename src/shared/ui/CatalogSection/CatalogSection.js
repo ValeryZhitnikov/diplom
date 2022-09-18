@@ -15,6 +15,7 @@ const offsetSize = 6;
 const CatalogSection = () => {
   const [loadMore, setLoadMore] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [offsetUrl, setOffsetUrl] = useState(''); 
   const [currentOffset, setCurrentOfset] = useState(initialOffset); 
   const [products, setProducts] = useState([]);
@@ -45,6 +46,7 @@ const CatalogSection = () => {
     setProducts([]);
     setCurrentOfset(initialOffset);
     setOffsetUrl('');
+    setSelectedCategoryId(categoryId);
     const categoryUrl = categoryId ? `categoryId=${categoryId}` : '';
     setSelectedCategory(categoryUrl);
     const requestUrl = q ? `${process.env.REACT_APP_ITEMS_URL}?q=${q}&${categoryUrl}` : `${process.env.REACT_APP_ITEMS_URL}?${categoryUrl}`;
@@ -83,7 +85,7 @@ const CatalogSection = () => {
         {loading && <Preloader />}
         {products && !loading && !error && 
         <>
-        <CategoriesList selectedCategory={selectedCategory} onSelectCategoryHandler={onSelectCategoryHandler} />
+        <CategoriesList selectedCategoryId={selectedCategoryId} onSelectCategoryHandler={onSelectCategoryHandler} />
         <div className="row">
           {productsList.length > 0 ? productsList : <p>Извините, таких товаров нет</p>}
         </div>

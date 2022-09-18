@@ -5,7 +5,7 @@ import ErrorComponent from 'shared/ui/ErrorComponent';
 import Preloader from 'shared/ui/Preloader';
 
 const CategoriesList = (props) => {
-  const { selectedCategory, onSelectCategoryHandler } = props;
+  const { selectedCategoryId, onSelectCategoryHandler } = props;
   const [categories, setCategoriesList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,8 +17,7 @@ const CategoriesList = (props) => {
   const categoriesList = categories ? categories.map(category => {
     return ( 
     <li key={category.id} className="nav-item">
-      {/* TODO Доделать выделение активной категории */}
-      <button onClick={() => onSelectCategoryHandler(category.id)} className={`nav-link nav-link_category`} href="#">{category.title}</button>
+      <button onClick={() => onSelectCategoryHandler(category.id)} className={`nav-link nav-link_category ${selectedCategoryId === category.id ? 'active' : ''}`} href="#">{category.title}</button>
     </li>);
   }) : [];
 
@@ -29,7 +28,7 @@ const CategoriesList = (props) => {
       {categories && !loading && !error && 
       <ul className="catalog-categories nav justify-content-center">
         <li className="nav-item">
-          <button onClick={() => onSelectCategoryHandler(null)} className="nav-link nav-link_category active" href="#">Все</button>
+          <button onClick={() => onSelectCategoryHandler(null)} className={`nav-link nav-link_category ${!selectedCategoryId ? 'active' : ''}`} href="#">Все</button>
         </li>
         {categoriesList}
       </ul>
